@@ -1,5 +1,9 @@
 //Core
 import React from 'react';
+import { connect } from 'react-redux';
+//Redux
+import contactsOperations from 'redux/contacts/contactsOperations';
+import contactsSelectors from 'redux/contacts/contactsSelectors';
 //Types
 import contactListItemTypes from './ContactListItemTypes';
 //Styles
@@ -18,4 +22,12 @@ const ContactListItem = ({ name, number, onRemove }) => (
 
 ContactListItem.propTypes = contactListItemTypes;
 
-export default ContactListItem;
+const mapStateToProps = (state, { id }) => ({
+	...contactsSelectors.getContactById(state, id),
+});
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+	onRemove: () => dispatch(contactsOperations.removeContact(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactListItem);

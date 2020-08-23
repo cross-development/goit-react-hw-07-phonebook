@@ -1,0 +1,19 @@
+{
+  "contacts": [
+    {
+      "name": "Vitaliy",
+      "number": 3805011122233,
+      "id": 1
+    },
+    {
+      "name": "Denis",
+      "number": 3805022233344,
+      "id": 2
+    },
+    {
+      "name": "Vika",
+      "number": 3805033344455,
+      "id": 3
+    }
+  ]
+}

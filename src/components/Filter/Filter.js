@@ -1,8 +1,9 @@
 //Core
 import React from 'react';
-//Redux
 import { connect } from 'react-redux';
-import contactsAction from '../../redux/contacts/contactsAction';
+//Redux
+import contactsActions from 'redux/contacts/contactsActions';
+import contactsSelectors from 'redux/contacts/contactsSelectors';
 //Types
 import filterTypes from './FilterTypes';
 //Styles
@@ -26,13 +27,13 @@ const Filter = ({ value, contacts, onChangeFilter }) =>
 
 Filter.propTypes = filterTypes;
 
-const mapStateToProps = ({ contacts }) => ({
-	value: contacts.filter,
-	contacts: contacts.items,
+const mapStateToProps = state => ({
+	value: contactsSelectors.getFilter(state),
+	contacts: contactsSelectors.getContacts(state),
 });
 
 const mapDispatchToProps = {
-	onChangeFilter: contactsAction.changeFilter,
+	onChangeFilter: contactsActions.changeFilter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

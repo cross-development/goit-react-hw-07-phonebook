@@ -2,13 +2,11 @@
 import PropTypes from 'prop-types';
 
 const contactListTypes = {
-	onRemoveContact: PropTypes.func.isRequired,
-
 	contacts: PropTypes.arrayOf(
 		PropTypes.shape({
-			id: PropTypes.string.isRequired,
+			id: PropTypes.number.isRequired,
 			name: PropTypes.string.isRequired,
-			number: PropTypes.string.isRequired,
+			number: PropTypes.number.isRequired,
 		}).isRequired,
 	).isRequired,
 };
