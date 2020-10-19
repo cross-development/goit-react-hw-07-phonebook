@@ -1,20 +1,28 @@
 //Core
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux';
-//Redux
-import contactsOperations from 'redux/contacts/contactsOperations';
-import contactsSelectors from 'redux/contacts/contactsSelectors';
-//Types
-import contactFormTypes from './ContactFormTypes';
 //Components
 import Notification from '../Notification';
+//Redux
+import { connect } from 'react-redux';
+import contactsSelectors from 'redux/contacts/contactsSelectors';
+import contactsOperations from 'redux/contacts/contactsOperations';
 //Styles
 import styles from './ContactForm.module.css';
 import fadeNotification from 'animation/fadeNotification.module.css';
 
 export class ContactForm extends Component {
-	static propTypes = contactFormTypes;
+	static propTypes = {
+		onAddContact: PropTypes.func.isRequired,
+		contacts: PropTypes.arrayOf(
+			PropTypes.exact({
+				id: PropTypes.number.isRequired,
+				name: PropTypes.string.isRequired,
+				number: PropTypes.number.isRequired,
+			}).isRequired,
+		).isRequired,
+	};
 
 	state = {
 		name: '',
@@ -50,9 +58,9 @@ export class ContactForm extends Component {
 			<>
 				<CSSTransition
 					in={isNotice}
-					classNames={fadeNotification}
 					timeout={250}
 					unmountOnExit
+					classNames={fadeNotification}
 				>
 					<Notification />
 				</CSSTransition>
@@ -61,12 +69,12 @@ export class ContactForm extends Component {
 					<label>
 						Name
 						<input
-							className={styles.input}
 							autoFocus
 							type="text"
 							name="name"
-							autoComplete="off"
 							value={name}
+							autoComplete="off"
+							className={styles.input}
 							onChange={this.handleChange}
 						/>
 					</label>
@@ -74,11 +82,11 @@ export class ContactForm extends Component {
 					<label>
 						Number
 						<input
-							className={styles.input}
 							type="number"
 							name="number"
-							autoComplete="off"
 							value={number}
+							autoComplete="off"
+							className={styles.input}
 							onChange={this.handleChange}
 						/>
 					</label>

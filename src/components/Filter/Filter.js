@@ -1,11 +1,10 @@
 //Core
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 //Redux
+import { connect } from 'react-redux';
 import contactsActions from 'redux/contacts/contactsActions';
 import contactsSelectors from 'redux/contacts/contactsSelectors';
-//Types
-import filterTypes from './FilterTypes';
 //Styles
 import styles from './Filter.module.css';
 
@@ -15,17 +14,27 @@ const Filter = ({ value, contacts, onChangeFilter }) =>
 			<label>
 				Find contacts by name
 				<input
-					className={styles.input}
 					type="text"
-					autoComplete="off"
 					value={value}
+					autoComplete="off"
+					className={styles.input}
 					onChange={e => onChangeFilter(e.target.value)}
 				/>
 			</label>
 		</div>
 	);
 
-Filter.propTypes = filterTypes;
+Filter.propTypes = {
+	value: PropTypes.string.isRequired,
+	onChangeFilter: PropTypes.func.isRequired,
+	contacts: PropTypes.arrayOf(
+		PropTypes.exact({
+			id: PropTypes.number.isRequired,
+			name: PropTypes.string.isRequired,
+			number: PropTypes.number.isRequired,
+		}).isRequired,
+	).isRequired,
+};
 
 const mapStateToProps = state => ({
 	value: contactsSelectors.getFilter(state),

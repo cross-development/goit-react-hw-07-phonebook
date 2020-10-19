@@ -1,13 +1,12 @@
 //Core
 import React from 'react';
+import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { connect } from 'react-redux';
-//Redux
-import contactsSelectors from 'redux/contacts/contactsSelectors';
-//Types
-import contactListTypes from './ContactListTypes';
 //Components
 import ContactListItem from '../ContactListItem';
+//Redux
+import { connect } from 'react-redux';
+import contactsSelectors from 'redux/contacts/contactsSelectors';
 //Styles
 import styles from './ContactList.module.css';
 import fadeContactList from 'animation/fadeContactList.module.css';
@@ -23,7 +22,15 @@ const ContactList = ({ contacts }) =>
 		</TransitionGroup>
 	);
 
-ContactList.propTypes = contactListTypes;
+ContactList.propTypes = {
+	contacts: PropTypes.arrayOf(
+		PropTypes.exact({
+			id: PropTypes.number.isRequired,
+			name: PropTypes.string.isRequired,
+			number: PropTypes.number.isRequired,
+		}).isRequired,
+	).isRequired,
+};
 
 const mapStateToProps = state => ({
 	contacts: contactsSelectors.getVisibleContacts(state),

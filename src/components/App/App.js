@@ -1,7 +1,7 @@
 //Core
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux';
 //Components
 import Filter from '../Filter';
 import Heading from '../Heading';
@@ -9,15 +9,16 @@ import Section from '../Section';
 import ContactList from '../ContactList';
 import ContactForm from '../ContactForm';
 //Redux
+import { connect } from 'react-redux';
 import contactsOperations from 'redux/contacts/contactsOperations';
-//Types
-import appTypes from './AppTypes';
 //Styles
 import fadeFilter from 'animation/fadeFilter.module.css';
 import fadeHeading from 'animation/fadeHeading.module.css';
 
 class App extends Component {
-	static propTypes = appTypes;
+	static propTypes = {
+		onFetchContacts: PropTypes.func.isRequired,
+	};
 
 	componentDidMount() {
 		this.props.onFetchContacts();
@@ -26,13 +27,24 @@ class App extends Component {
 	render() {
 		return (
 			<Section>
-				<CSSTransition in={true} classNames={fadeHeading} timeout={500} appear unmountOnExit>
+				<CSSTransition
+					appear
+					in={true}
+					timeout={500}
+					unmountOnExit
+					classNames={fadeHeading}
+				>
 					<Heading />
 				</CSSTransition>
 
 				<ContactForm />
 
-				<CSSTransition in={true} classNames={fadeFilter} timeout={250} unmountOnExit>
+				<CSSTransition
+					in={true}
+					timeout={250}
+					unmountOnExit
+					classNames={fadeFilter}
+				>
 					<Filter />
 				</CSSTransition>
 

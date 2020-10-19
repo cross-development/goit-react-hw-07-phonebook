@@ -1,12 +1,15 @@
 //Core
 import React from 'react';
-//Types
-import sectionTypes from './SectionTypes';
+import PropTypes from 'prop-types';
 //Styles
 import styles from './Section.module.css';
 
-const Section = ({ children }) => <section className={styles.section}>{children}</section>;
+const Section = ({ children }) => (
+	<section className={styles.section}>{children}</section>
+);
 
-Section.propTypes = sectionTypes;
+Section.propTypes = {
+	children: PropTypes.node.isRequired,
+};
 
 export default Section;
