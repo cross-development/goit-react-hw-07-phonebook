@@ -16,8 +16,8 @@ const getVisibleContacts = createSelector(
 );
 
 const getContactById = createSelector(
-	[getContactId, getContacts],
-	(contactId, contacts) => contacts.find(({ id }) => id === contactId),
+	[getContacts, getContactId],
+	(contacts, contactId) => contacts.find(({ id }) => id === contactId),
 );
 
 export default {

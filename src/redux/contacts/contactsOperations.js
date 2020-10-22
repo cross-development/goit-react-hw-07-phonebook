@@ -1,7 +1,7 @@
 //Core
 import axios from 'axios';
 //Redux
-import contactsActions from '../contacts/contactsActions';
+import contactsActions from './contactsActions';
 
 axios.defaults.baseURL = 'http://localhost:2000';
 
