@@ -9,7 +9,7 @@ const fetchContacts = () => dispatch => {
 	dispatch(contactsActions.fetchContactsRequest());
 
 	axios
-		.get('/contacts')
+		.get('/api/contacts')
 		.then(({ data }) => dispatch(contactsActions.fetchContactsSuccess(data)))
 		.catch(error => dispatch(contactsActions.fetchContactsFailure(error)));
 };
